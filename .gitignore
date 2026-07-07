@@ -1,6 +1,9 @@
 node_modules/
 .git-portable/
+.vercel/
 .env
 *.zip
 *.db
 ~$*
+
+.vercel
