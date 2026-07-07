@@ -1,0 +1,890 @@
+/* Global Styling Variables */
+:root {
+  --bg-primary: #030712;
+  --bg-secondary: #0b1528;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --accent-blue: #3b82f6;
+  --accent-indigo: #6366f1;
+  --glass-bg: rgba(17, 25, 40, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --error: #ef4444;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cosmic Background Glows */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.45;
+}
+.bg-glow-1 {
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, var(--accent-indigo), transparent 70%);
+  top: -10%;
+  left: -10%;
+}
+.bg-glow-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, var(--accent-blue), transparent 70%);
+  bottom: -10%;
+  right: -10%;
+}
+
+/* Main Layout Wrapper */
+.app-container {
+  width: 100%;
+  max-width: 1100px;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.6s ease;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.logo span {
+  font-weight: 300;
+  color: var(--text-secondary);
+  -webkit-text-fill-color: var(--text-secondary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* View Switcher Toggle */
+.view-toggle {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  padding: 6px;
+  border-radius: 30px;
+  margin: 0 auto 35px auto;
+  backdrop-filter: blur(10px);
+  width: fit-content;
+  gap: 4px;
+  animation: fadeIn 0.8s ease;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.toggle-btn svg {
+  transition: var(--transition);
+}
+
+.toggle-btn:hover {
+  color: #fff;
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Main Section Controllers */
+.view-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.view-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass Cards UI */
+.search-card, .admin-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.search-card h2, .admin-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #fff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* Forms & Inputs */
+.search-input-group {
+  display: flex;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: var(--transition);
+}
+
+.search-input-group:focus-within {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.search-input-group input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.search-btn {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+  color: white;
+  border: none;
+  padding: 0 32px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Spinner */
+.spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  animation: rotate 1.5s linear infinite;
+}
+
+.spinner circle {
+  stroke: #ffffff;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* Status Notifications */
+.message {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.message.success {
+  display: block;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--success);
+}
+
+.message.error {
+  display: block;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--error);
+}
+
+/* Admin Grid Form */
+.admin-card {
+  max-width: 750px;
+  text-align: left;
+}
+
+.admin-card-header {
+  margin-bottom: 30px;
+}
+
+.form-grid-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.form-group input {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-group input:focus {
+  border-color: var(--accent-indigo);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* File upload styling customization */
+.form-group input[type="file"] {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.detected-id-preview {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  font-weight: 600;
+  display: none;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent-indigo), var(--accent-blue));
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+}
+
+/* Certificate Result Container & Animation */
+.certificate-result-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+
+.action-btn:hover {
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================================= */
+/* PREMIUM SCANNED CERTIFICATE VIEWPORT      */
+/* ========================================= */
+.certificate-image-wrapper {
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+}
+
+#cert-display-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.cert-header {
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+}
+
+.cert-logo-container {
+  margin-bottom: 12px;
+}
+
+.cert-logo-text {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #1a2a3a;
+  position: relative;
+}
+
+.cert-logo-text::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #a1824a, transparent);
+}
+
+.cert-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #8c6c2d;
+  margin-top: 15px;
+  letter-spacing: 0.02em;
+}
+
+.cert-recipient-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #556372;
+  z-index: 2;
+  margin: 10px 0;
+}
+
+.cert-student-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a2a3a;
+  border-bottom: 2px solid rgba(161, 130, 74, 0.4);
+  padding-bottom: 5px;
+  min-width: 60%;
+  text-align: center;
+  z-index: 2;
+  letter-spacing: 0.03em;
+}
+
+.cert-body-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #556372;
+  text-align: center;
+  max-width: 75%;
+  line-height: 1.6;
+  z-index: 2;
+  margin: 10px 0;
+}
+
+.cert-course-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #8c6c2d;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Certificate Meta Details Group */
+.cert-meta-row {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-top: 15px;
+  z-index: 2;
+}
+
+.cert-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #7b8a9c;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a2a3a;
+}
+
+.cert-id-badge {
+  font-family: monospace;
+  background-color: #eae3cf;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(161, 130, 74, 0.3);
+}
+
+/* Footer (Signatures & Seal) */
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  z-index: 2;
+}
+
+.cert-signature-block {
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature {
+  font-size: 1.8rem;
+  color: #2b3a4a;
+  margin-bottom: 5px;
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.signature-cursive {
+  font-family: 'Great Vibes', cursive;
+}
+
+.signature-line {
+  width: 100%;
+  height: 1px;
+  background-color: #a1824a;
+  margin-bottom: 6px;
+}
+
+.signature-title {
+  font-size: 0.75rem;
+  color: #7b8a9c;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gold Stamp Seal Module */
+.cert-seal-block {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gold-seal {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.seal-ribbon {
+  position: absolute;
+  width: 18px;
+  height: 70px;
+  background: linear-gradient(135deg, #a81c1c 0%, #700f0f 100%);
+  bottom: -35px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
+  z-index: 1;
+}
+
+.ribbon-left {
+  left: 24px;
+  transform: rotate(-12deg);
+}
+
+.ribbon-right {
+  right: 24px;
+  transform: rotate(12deg);
+}
+
+.seal-outer-starburst {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--gold-gradient);
+  border-radius: 50%;
+  clip-path: polygon(
+    50% 0%, 54% 12%, 67% 6%, 66% 20%, 78% 13%, 73% 27%, 86% 23%, 78% 36%, 90% 35%, 80% 47%, 
+    90% 50%, 80% 53%, 90% 65%, 78% 64%, 86% 77%, 73% 73%, 78% 87%, 66% 80%, 67% 94%, 54% 88%, 
+    50% 100%, 46% 88%, 33% 94%, 34% 80%, 22% 87%, 27% 73%, 14% 77%, 22% 64%, 10% 65%, 20% 53%, 
+    10% 50%, 20% 47%, 10% 35%, 22% 36%, 14% 23%, 27% 27%, 22% 13%, 34% 20%, 33% 6%, 46% 12%
+  );
+  animation: sealGlow 5s ease-in-out infinite alternate;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.seal-inner-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: radial-gradient(circle, #fcf6ba 0%, #b38728 80%, #996e13 100%);
+  border-radius: 50%;
+  z-index: 3;
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.4), inset 0 -2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.seal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3d2b07;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+
+.seal-content svg {
+  width: 20px;
+  height: 20px;
+  color: #4a3407;
+  margin-bottom: 2px;
+}
+
+.seal-content span {
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  text-shadow: 0.5px 0.5px #fff;
+}
+
+/* Footer Bottom Note */
+.app-footer-note {
+  text-align: center;
+  margin-top: auto;
+  padding-top: 40px;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
+}
+
+/* Keyframes Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sealGlow {
+  from { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4)); }
+  to { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)); }
+}
+
+/* Responsive Certificate adjustments */
+@media (max-width: 890px) {
+  .certificate-wrapper {
+    font-size: 13px; /* Scaled text container */
+  }
+  .cert-main-title {
+    font-size: 2rem;
+  }
+  .cert-student-name {
+    font-size: 2.2rem;
+  }
+  .cert-course-name {
+    font-size: 1.4rem;
+  }
+  .gold-seal {
+    width: 75px;
+    height: 75px;
+  }
+  .seal-inner-circle {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+  .seal-ribbon {
+    width: 14px;
+    height: 55px;
+    bottom: -25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .certificate-wrapper {
+    font-size: 10px;
+  }
+  .certificate-border-inner {
+    padding: 20px;
+  }
+  .cert-main-title {
+    font-size: 1.5rem;
+    margin-top: 5px;
+  }
+  .cert-student-name {
+    font-size: 1.6rem;
+  }
+  .cert-course-name {
+    font-size: 1.1rem;
+  }
+  .gold-seal {
+    width: 60px;
+    height: 60px;
+  }
+  .seal-ribbon {
+    width: 10px;
+    height: 40px;
+    bottom: -15px;
+  }
+  .seal-inner-circle {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+  }
+  .seal-content svg {
+    width: 12px;
+    height: 12px;
+  }
+  .seal-content span {
+    font-size: 0.4rem;
+  }
+  .signature {
+    font-size: 1.2rem;
+    height: 25px;
+  }
+}
+
+/* ========================================= */
+/* CSS PRINT STYLESHEET RULES               */
+/* ========================================= */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+  }
+
+  /* Hide cosmic glows, navbar, search forms, buttons and footers */
+  .bg-glow,
+  .app-header,
+  .view-toggle,
+  .search-card,
+  .admin-card,
+  .result-actions,
+  .app-footer-note,
+  #admin-view {
+    display: none !important;
+  }
+
+  /* Expand certificate view container to print correctly */
+  .certificate-result-container,
+  .view-section,
+  .main-content,
+  .app-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    display: block !important;
+  }
+
+  .certificate-wrapper {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background-color: #faf6eb !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1.414 / 1 !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    -webkit-print-color-adjust: exact; /* Forces browser to print backgrounds */
+    print-color-adjust: exact;
+  }
+
+  .certificate-border-inner {
+    background-color: rgba(253, 251, 246, 0.95) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .seal-ribbon {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .seal-outer-starburst, .seal-inner-circle {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: var(--gold-gradient) !important;
+  }
+
+  .certificate-watermark {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
